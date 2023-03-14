@@ -128,3 +128,8 @@ git push origin <branch_name>
 ### 七、相关issue状态更新
 pr合并后，对应issue更改为状态对应的label。比如从status/confirmed，改为status/resloved。
 
+### 八、参考资料
++ [github 分支开发流程](https://docs.github.com/zh/get-started/quickstart/github-flow)
++ [mermaid 开发贡献流程](https://mermaid.js.org/community/development.html)
+
+
