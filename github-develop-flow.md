@@ -3,6 +3,8 @@
 Table of Contents
 =================
 
+   * [github 开发分支流程](#github-开发分支流程)
+   * [Table of Contents](#table-of-contents)
       * [一、远端及本地仓库准备](#一远端及本地仓库准备)
       * [二、feature/bug issue提出。](#二featurebug-issue提出)
       * [三、基于最新的master创建研发分支](#三基于最新的master创建研发分支)
@@ -76,14 +78,28 @@ issue的三个常用的属性
 * 更新本地master分支，与上游的master分支做同步。
 ```
 git fetch upstream master
-git rebase upstream/master
-or
-git pull --rebase upstream master
+git rebase upstream/master # rebase 可避免再次增加一个merge记录
 
-两者等同。
+或者
+git fetch upstream master
+git merge --no-ff upstream/master # 默认快进ff，改为--no-ff比较好
+
+或者
+
+# Tips: 当上游分支仓库设置为pr提交者的地址，那么也可用于审核者在本地的分支，同步pr提交者的修改，然后在本地编译看差别
+# git pull --rebase pr master 
+git pull --rebase upstream master 
+
+
 ```
+
 * 基于最新的master，创建研发分支。
 ```
+# 分支名参考命名规则： 
+# 从类型开始，例如feature或bug，然后是供参考的问题编号，以及描述问题的文本。
+# feature/945-state-diagrams
+# bug/12425-add-search-function
+
 git checkout -b <研发分支名>
 ```
 * 在研发分支，进行编码。
@@ -144,6 +160,7 @@ git push origin <branch_name>
 * pr干系人，查看pr提交的内容，就代码风格、逻辑等进行同级评审。通过这个方式进一步降低出bug的概率，同时也是一个相互讨论和学习的过程。
 * 评审出的问题，直接在研发分支，修改提交，pr内容会自动更新。
 * 最终pr同级评审通过后，合并到master分支。
+
 ```
 经过测试修改和代码评审，最后pr通过了，在合并之前发现commit list中含有很多临时提交，这些提交对版本信息无意义，建议将其，精简提交信息。
 ```
