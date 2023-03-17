@@ -1,4 +1,19 @@
-### 一、远端及本地仓库准备
+# github 开发分支流程
+
+Table of Contents
+=================
+
+      * [一、远端及本地仓库准备](#一远端及本地仓库准备)
+      * [二、feature/bug issue提出。](#二featurebug-issue提出)
+      * [三、基于最新的master创建研发分支](#三基于最新的master创建研发分支)
+      * [四、代码提交](#四代码提交)
+      * [五、创建pr](#五创建pr)
+      * [六、代码评审，pr合并](#六代码评审pr合并)
+      * [七、相关issue状态更新](#七相关issue状态更新)
+      * [八、参考资料](#八参考资料)
+
+## 一、远端及本地仓库准备
+
 * fork上游仓库到个人名下，
 * clone个人名下的仓库到本地
 * 为自己的本地仓库配置远端仓库源
@@ -7,7 +22,9 @@
    ```
    eg: git remote add <起个名做标示> <上游仓库的地址>
    ```
-### 二、feature/bug issue提出。
+
+## 二、feature/bug issue提出。
+
 issue的三个常用的属性
 * label：标签，可以用来设置issue的类型、重要程度、目前的处理状态。[issue 标签的设置规范](https://github.com/ukui/community/blob/master/zh_CN/issue_manage.md)
 * Milestone：里程碑，可以用来设置研发项目的不同阶段，明确任务的优先级与截止日期。
@@ -54,7 +71,8 @@ issue的三个常用的属性
 
 **补充说明:** 需要补充说明的内容.
 
-### 三、基于最新的master创建研发分支
+## 三、基于最新的master创建研发分支
+
 * 更新本地master分支，与上游的master分支做同步。
 ```
 git fetch upstream master
@@ -70,7 +88,8 @@ git checkout -b <研发分支名>
 ```
 * 在研发分支，进行编码。
 
-### 四、代码提交
+## 四、代码提交
+
 * 查看分支状态，查看文件变更，确认提交的内容。（将不需要提交的文件类型，配置到.gitignore文件，减少diff出不必要的文件信息）
 * 代码commit之前，应该完成静态代码检测，可通过配置pre-commit脚本(位于本地仓库.git/hooks目录下)完成。
 * 规范的commit message是版本维护以及代码合并的基础。
@@ -105,7 +124,8 @@ git pull --rebase upstream master // 研发分支与上游master分支同步。�
 git push origin <branch_name>
 ```
 
-### 五、创建pr
+## 五、创建pr
+
 在个人名下仓库的github页面，新建pull request：
 * 检查：目标仓库为上游仓库，分支为master分支；
 * 检查：即将被合入的仓库为名下fork的仓库，分支为开发分支；
@@ -118,17 +138,22 @@ git push origin <branch_name>
 ```
 * 创建pr时会自动检测当前pr包含的提交内容是否可有正常合并。如有冲突，需要基于研发分支处理冲突，直接提交即可，pr会自动更新。
 * 指定pr的Reviewers，来通知干系人，进行代码评审。
-### 六、代码评审，pr合并
+
+## 六、代码评审，pr合并
+
 * pr干系人，查看pr提交的内容，就代码风格、逻辑等进行同级评审。通过这个方式进一步降低出bug的概率，同时也是一个相互讨论和学习的过程。
 * 评审出的问题，直接在研发分支，修改提交，pr内容会自动更新。
 * 最终pr同级评审通过后，合并到master分支。
 ```
 经过测试修改和代码评审，最后pr通过了，在合并之前发现commit list中含有很多临时提交，这些提交对版本信息无意义，建议将其，精简提交信息。
 ```
-### 七、相关issue状态更新
+
+## 七、相关issue状态更新
+
 pr合并后，对应issue更改为状态对应的label。比如从status/confirmed，改为status/resloved。
 
-### 八、参考资料
+## 八、参考资料
+
 + [github 分支开发流程](https://docs.github.com/zh/get-started/quickstart/github-flow)
 + [mermaid 开发贡献流程](https://mermaid.js.org/community/development.html)
 
